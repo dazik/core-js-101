@@ -270,8 +270,14 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  let resArr = [];
+  arr.map((v, i) => {
+    const newArr = Array(i + 1).fill(v);
+    resArr = resArr.concat(newArr);
+    return resArr;
+  });
+  return resArr;
 }
 
 
@@ -288,8 +294,20 @@ function propagateItemsByPositionIndex(/* arr */) {
  *   [ 1,2,3,4,5,6,7,8,9,10 ] => [ 10, 9, 8 ]
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
-function get3TopItems(/* arr */) {
-  throw new Error('Not implemented');
+function get3TopItems(arr) {
+  if (arr.length < 1) return arr;
+  const resArr = [];
+  const max1 = arr.reduce((p, v) => (p > v ? p : v));
+  resArr.push(max1);
+  arr.splice(arr.indexOf(max1), 1);
+  if (arr.length < 1) return resArr;
+  const max2 = arr.reduce((p, v) => (p > v ? p : v));
+  resArr.push(max2);
+  arr.splice(arr.indexOf(max2), 1);
+  if (arr.length < 1) return resArr;
+  const max3 = arr.reduce((p, v) => (p > v ? p : v));
+  resArr.push(max3);
+  return resArr;
 }
 
 
@@ -306,8 +324,14 @@ function get3TopItems(/* arr */) {
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-function getPositivesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getPositivesCount(arr) {
+  let counter = 0;
+  arr.map((v) => {
+    if (typeof v !== 'number') return null;
+    if (v > 0) counter += 1;
+    return null;
+  });
+  return counter;
 }
 
 /**
@@ -323,8 +347,23 @@ function getPositivesCount(/* arr */) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const numbers = {
+    zero: 0,
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9,
+  };
+  const numArr = Object.keys(numbers);
+  let resArr = arr.map((v) => numbers[v]);
+  resArr = resArr.sort((a, b) => a - b);
+  return resArr.map((v) => numArr[v]);
 }
 
 /**
@@ -339,8 +378,10 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   [ -1, 1, -1, 1 ]      => 0
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
-function getItemsSum(/* arr */) {
-  throw new Error('Not implemented');
+function getItemsSum(arr) {
+  if (arr.length < 1) return 0;
+  const reducer = (accumulator, value) => accumulator + value;
+  return arr.reduce(reducer);
 }
 
 /**
@@ -355,8 +396,15 @@ function getItemsSum(/* arr */) {
  *  [ -1, 'false', null, 0 ] => 2
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  let counter = 0;
+  arr.map((v) => {
+    if (Boolean(v) === false) {
+      counter += 1;
+      return null;
+    } return null;
+  });
+  return counter;
 }
 
 /**
@@ -373,8 +421,14 @@ function getFalsyValuesCount(/* arr */) {
  *    [ null, undefined, null ], null => 2
  *    [ true, 0, 1, 'true' ], true => 1
  */
-function findAllOccurences(/* arr, item */) {
-  throw new Error('Not implemented');
+function findAllOccurences(arr, item) {
+  let counter = 0;
+  arr.map((v) => {
+    if (v === item) {
+      counter += 1;
+    } return null;
+  });
+  return counter;
 }
 
 /**
@@ -388,8 +442,8 @@ function findAllOccurences(/* arr, item */) {
  *    [1, 2, 3, 4, 5]                   => '1,2,3,4,5'
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
-function toStringList(/* arr */) {
-  throw new Error('Not implemented');
+function toStringList(arr) {
+  return arr.join(',');
 }
 
 
@@ -419,8 +473,9 @@ function toStringList(/* arr */) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
+function sortCitiesArray(arr) {
+  arr.sort((a, b) => (a.city < b.city ? 1 : -1));
+  return arr.sort((a, b) => (a.country > b.country ? 1 : -1));
 }
 
 /**
