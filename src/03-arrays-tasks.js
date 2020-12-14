@@ -595,8 +595,8 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.map(childrenSelector).flat(Infinity);
 }
 
 
@@ -612,8 +612,16 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  let promArr = arr;
+  let result;
+  indexes.map((v) => {
+    if (typeof promArr[v] === 'object') {
+      promArr = promArr[v];
+    } else result = promArr[v];
+    return null;
+  });
+  return result;
 }
 
 
@@ -635,8 +643,20 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const headArr = [];
+  const tailArr = [];
+  if (arr.length % 2 !== 0) {
+    const midIndex = parseInt(arr.length / 2, 10);
+    headArr.push(arr[midIndex]);
+    arr.splice(midIndex, 1);
+  }
+  arr.map((v, i) => {
+    if (i < arr.length / 2) headArr.push(v);
+    else tailArr.push(v);
+    return null;
+  });
+  return tailArr.concat(headArr);
 }
 
 
