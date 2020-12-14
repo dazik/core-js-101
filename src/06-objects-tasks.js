@@ -121,29 +121,24 @@ const cssSelectorBuilder = {
   attributes: [],
   pseudoClasses: [],
   pseudoElements: [],
-  element(value) {
-    this.el = value;
-    return this;
+  element(/* value */) {
+    throw new Error('Not implemented');
   },
 
-  id(value) {
-    this.ids.push(value);
-    return this;
+  id(/* value */) {
+    throw new Error('Not implemented');
   },
 
-  class(value) {
-    this.classes.push(value);
-    return this;
+  class(/* value */) {
+    throw new Error('Not implemented');
   },
 
-  attr(value) {
-    this.attributes.push(value);
-    return this;
+  attr(/* value */) {
+    throw new Error('Not implemented');
   },
 
-  pseudoClass(value) {
-    this.pseudoClasses.push(value);
-    return this;
+  pseudoClass(/* value */) {
+    throw new Error('Not implemented');
   },
 
   pseudoElement(/* value */) {
